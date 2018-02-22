@@ -9,7 +9,5 @@ export class ServerAccessService {
 
   public getMenu(): Observable<any> {
     return this.http.get("../../../assets/mockup/menu.json");
-
-}
-
+  }
 }
