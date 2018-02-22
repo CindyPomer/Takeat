@@ -10,13 +10,24 @@ export class FoodSelectorComponent implements OnInit {
   @Input() foodsToDisplay: FoodItem[];
   @Input() isMulty = false;
   @Input() foodTitle: string;
-  @Output() itemSelected = new EventEmitter<string>();
+  @Output() changed = new EventEmitter<string[]>();
 
+  selectedIds: string[] = [];
   constructor() {}
 
   ngOnInit() {}
 
-  sendSelectedItem(id) {
-    this.itemSelected.emit(id);
+  sendSelectedItem(e) {
+    const id = e.srcElement.id;
+    if (!this.isMulty) {
+      this.selectedIds[0] = id;
+    } else {
+      if (e.srcElement.checked) {
+        this.selectedIds[id] = id;
+      } else {
+        delete this.selectedIds[id];
+      }
+    }
+    this.changed.emit(this.selectedIds);
   }
 }

@@ -1,5 +1,5 @@
 <ng-container *ngIf="(menu$ | async) as menu">
-  <app-food-selector [foodsToDisplay]="menu.breads" [isMulty]="false" foodTitle="לחם"></app-food-selector>
-  <app-food-selector [foodsToDisplay]="menu.salads" [isMulty]="true" foodTitle="סלטים"></app-food-selector>
-  <app-food-selector [foodsToDisplay]="menu.mainCourses" [isMulty]="false" foodTitle="מנה עיקרית"></app-food-selector>
+  <app-food-selector [foodsToDisplay]="menu.breads" [isMulty]="false" foodTitle="לחם" (changed)="breadSelected($event)"></app-food-selector>
+  <app-food-selector [foodsToDisplay]="menu.salads" [isMulty]="true" foodTitle="סלטים" (changed)="saladSelected($event)"></app-food-selector>
+  <app-food-selector [foodsToDisplay]="menu.mainCourses" [isMulty]="false" foodTitle="מנה עיקרית" (changed)="mainCourseSelected($event)"></app-food-selector>
 </ng-container>

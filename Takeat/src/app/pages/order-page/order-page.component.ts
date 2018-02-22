@@ -16,4 +16,14 @@ export class OrderPageComponent implements OnInit {
   ngOnInit() {
     this.menu$ = this.serverAccessService.getMenu$();
   }
+
+  breadSelected(selected) {
+    console.log('bread:', selected);
+  }
+  saladSelected(selected) {
+    console.log('salad:', selected);
+  }
+  mainCourseSelected(selected) {
+    console.log('main:', selected);
+  }
 }
