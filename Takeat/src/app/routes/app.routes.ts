@@ -1,7 +1,8 @@
-import { LoginComponent } from "./../Pages/login/login.component";
-import { NgModule } from "@angular/core";
-import { Routes, RouterModule } from "@angular/router";
-import { OrderPageComponent } from "../pages/order-page/order-page.component";
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+
+import { OrderPageComponent } from '../pages/order-page/order-page.component';
+import { LoginComponent } from './../Pages/login/login.component';
 
 const routes: Routes = [
   { path: "", pathMatch: "full", redirectTo: "login" },

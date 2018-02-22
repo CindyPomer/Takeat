@@ -1,5 +1,17 @@
+<header class="mat-typography">
+  <section>
+    <h1> שלום {{user}}. ברוך הבא לדף ההזמנות!</h1>
+  </section>
+</header>
 <ng-container *ngIf="(menu$ | async) as menu">
-  <app-food-selector [foodsToDisplay]="menu.breads" [isMulty]="false" foodTitle="לחם" (changed)="breadSelected($event)"></app-food-selector>
-  <app-food-selector [foodsToDisplay]="menu.salads" [isMulty]="true" foodTitle="סלטים" (changed)="saladSelected($event)"></app-food-selector>
-  <app-food-selector [foodsToDisplay]="menu.mainCourses" [isMulty]="false" foodTitle="מנה עיקרית" (changed)="mainCourseSelected($event)"></app-food-selector>
+  <section class="food-selectors-contrainer">
+    <app-food-selector [foodsToDisplay]="menu.breads" [isMulty]="false" foodTitle="לחם" (changed)="breadSelected($event)"></app-food-selector>
+    <mat-divider></mat-divider>
+    <app-food-selector [foodsToDisplay]="menu.salads" [isMulty]="true" foodTitle="סלטים" (changed)="saladSelected($event)"></app-food-selector>
+    <mat-divider></mat-divider>
+    <app-food-selector [foodsToDisplay]="menu.mainCourses" [isMulty]="false" foodTitle="מנה עיקרית" (changed)="mainCourseSelected($event)"></app-food-selector>
+  </section>
+  <footer>
+    <button mat-raised-button type="submit">שלח הזמנה</button>
+  </footer>
 </ng-container>

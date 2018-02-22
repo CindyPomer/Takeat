@@ -1,0 +1,39 @@
+header {
+  height: 200px;
+  background-image: url('../../../assets/images/counter.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  padding: 15px;
+  box-sizing: border-box;
+}
+
+header section {
+  background-image: url('../../../assets/images/Logo-no-bg.PNG');
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: 120px;
+  background-position: 100% 0px;
+}
+
+.mat-typography h1 {
+  position: relative;
+  top: 120px;
+  margin: -15px;
+  padding: 0em 1em;
+  background: rgba(0, 0, 0, .5);
+  text-transform: uppercase;
+  line-height: 2em;
+  font-size: 2em;
+  color: #FFF;
+}
+
+.food-selectors-contrainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.mat-divider {
+  width: 90%;
+}

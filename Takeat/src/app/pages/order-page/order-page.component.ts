@@ -1,8 +1,8 @@
-import { Component, OnInit } from "@angular/core";
-import { FoodItem } from "../../models/food-item.model";
-import { ServerAccessService } from "../../services/server-access/server-access.service";
-import { Subscription } from "rxjs/Subscription";
-import { Menu } from "../../models/menu.model";
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+
+import { Menu, Order } from '../../models';
+import { ServerAccessService } from '../../services/server-access/server-access.service';
 
 @Component({
   selector: "app-order-page",
@@ -10,11 +10,14 @@ import { Menu } from "../../models/menu.model";
   styleUrls: ["./order-page.component.css"]
 })
 export class OrderPageComponent implements OnInit {
-  menu$;
-  constructor(private serverAccessService: ServerAccessService) {}
+  menu$: Observable<Menu>;
+  order: Order;
+  user = '';
+  constructor(private serverAccessService: ServerAccessService) { }
 
   ngOnInit() {
     this.menu$ = this.serverAccessService.getMenu$();
+    this.user = this.getUser();
   }
 
   breadSelected(selected) {
@@ -25,5 +28,9 @@ export class OrderPageComponent implements OnInit {
   }
   mainCourseSelected(selected) {
     console.log('main:', selected);
+  }
+  getUser():string
+  {
+    return window.sessionStorage.getItem("UserName");
   }
 }

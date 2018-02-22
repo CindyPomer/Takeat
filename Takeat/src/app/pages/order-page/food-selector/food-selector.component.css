@@ -1,3 +1,7 @@
+:host {
+  display: block;
+}
+
 .grid-container {
   max-height: 50px;
 }
@@ -5,10 +9,12 @@
 ul {
   list-style: none;
 }
+
 li {
   display: inline-block;
   margin-left: 15px;
 }
+
 ul li input[type="radio"],
 ul li input[type="checkbox"] {
   position: absolute;
@@ -22,7 +28,7 @@ ul li label {
   font-size: 1.35em;
   cursor: pointer;
   transition: all 0.25s linear;
-  background-size: 150px;
+  background-size: cover;
 }
 
 ul li .check {
@@ -37,37 +43,35 @@ ul li:hover .check {
 }
 
 ul li .check::before {
-  /* display: block; */
-  /* position: absolute; */
-  /* content: ''; */
-  /* border-radius: 100%; */
-  /* height: 15px; */
-  /* width: 15px; */
-  /* top: 5px; */
-  /* left: 5px; */
-  /* margin: auto; */
   transition: background 0.25s linear;
 }
 
-input[type="radio"]:checked ~ .check,
-input[type="radio"]:checked ~ .check:hover,
-input[type="checkbox"]:checked ~ .check,
-input[type="checkbox"]:checked ~ .check:hover {
+input[type="radio"]:checked~.check,
+input[type="radio"]:checked~.check:hover,
+input[type="checkbox"]:checked~.check,
+input[type="checkbox"]:checked~.check:hover {
   opacity: 1;
 }
 
-input[type="radio"]:checked ~ .check::before,
-input[type="checkbox"]:checked ~ .check::before {
+input[type="radio"]:checked~.check::before,
+input[type="checkbox"]:checked~.check::before {
   background: #0dff92;
 }
 
-input[type="radio"]:checked ~ label,
-input[type="checkbox"]:checked ~ label {
+input[type="radio"]:checked~label,
+input[type="checkbox"]:checked~label {
   color: #0dff92;
 }
 
 .mat-card {
   background: transparent;
-  width: 100px;
-  height: 45px;
+  width: 320px;
+  height: 180px;
+}
+
+.mat-card span {
+  display: block;
+  margin: 0 -24px;
+  background: rgba(0, 0, 0, .5);
+  color: #FFF;
 }

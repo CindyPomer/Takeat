@@ -1,12 +1,13 @@
-import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { Observable } from "rxjs/Observable";
-import { Menu } from "../../models/menu.model";
-import "rxjs/add/operator/map";
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+import '../../rxjs';
+
+import { Menu } from '../../models/menu.model';
 
 @Injectable()
 export class ServerAccessService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   public getMenu$(): Observable<Menu> {
     return this.http.get("../../../assets/mockup/menu.json").map(response => {
