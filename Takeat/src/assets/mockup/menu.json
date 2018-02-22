@@ -1,0 +1,68 @@
+{
+"breads":
+[
+    {
+        "id":0,
+        "name":"פיתה",
+        "pic":"pita.png",
+        "type":1
+    },
+    {
+        "id":1,
+        "name":"לאפה",
+        "pic":"laffa.png",
+        "type":1
+    },
+    {
+        "id":2,
+        "name":"בגט",
+        "pic":"bagett.png",
+        "type":1
+    }
+],
+"salads":
+[
+    {
+        "id":3,
+        "name":"חומוס",
+        "pic":"hummus.png",
+        "type":2
+    },
+    {
+        "id":4,
+        "name":"סלט קלאסי",
+        "pic":"salad.png",
+        "type":2
+    },
+    {
+        "id":5,
+        "name":"ציפס",
+        "pic":"chips.png",
+        "type":2
+    }
+],
+"mainCourses":
+[
+    {
+        "id":6,
+        "name":"שניצל",
+        "pic":"shnitzel.png",
+        "type":3
+    },
+    {
+        "id":7,
+        "name":"שווארמה",
+        "pic":"shawarma.png",
+        "type":3
+    },
+    {
+        "id":8,
+        "name":"קבב",
+        "pic":"kabab.png",
+        "type":3
+    }
+]
+
+
+
+}
