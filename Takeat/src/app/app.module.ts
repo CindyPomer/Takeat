@@ -11,18 +11,29 @@ import {
   HttpHandler
 } from "@angular/common/http";
 import { AppComponent } from "./app.component";
-import { ServerAccessService } from './services/server-access/server-access.service';
+import { ServerAccessService } from "./services/server-access/server-access.service";
 import { FoodSelectorComponent } from "./pages/order-page/food-selector/food-selector.component";
 import { OrderPageComponent } from "./pages/order-page/order-page.component";
+import { AppRoutingModule, routingComponents } from "./routes/app.routes";
+import { LoginComponent } from "./Pages/login/login.component";
+import { FormsModule } from "@angular/forms";
 
 @NgModule({
-  declarations: [AppComponent, FoodSelectorComponent, OrderPageComponent],
+  declarations: [
+    AppComponent,
+    FoodSelectorComponent,
+    OrderPageComponent,
+    LoginComponent,
+    routingComponents
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     MatButtonModule,
     MatCardModule,
-    HttpClientModule
+    FormsModule,
+    HttpClientModule,
+    AppRoutingModule
   ],
   providers: [ServerAccessService],
   bootstrap: [AppComponent]

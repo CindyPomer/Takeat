@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
   }
 
   login(){
-    window.sessionStorage.setItem("UserName", this.userName)
+    window.sessionStorage.setItem("UserName", this.userName);
 
     alert(window.sessionStorage.getItem("UserName"));
   }
