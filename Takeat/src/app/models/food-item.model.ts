@@ -1,4 +1,4 @@
-interface FoodItem {
+export class FoodItem {
     id: number;
     name: string;
     img: string;
