@@ -12,6 +12,6 @@
     <app-food-selector [foodsToDisplay]="menu.mainCourses" [isMulty]="false" foodTitle="מנה עיקרית" (changed)="mainCourseSelected($event)"></app-food-selector>
   </section>
   <footer>
-    <button mat-raised-button type="submit">שלח הזמנה</button>
+    <button mat-raised-button type="submit" (click)="sendOrder()">שלח הזמנה</button>
   </footer>
 </ng-container>

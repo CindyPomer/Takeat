@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { userNameSessionKey } from '../../models/global-consts';
 
 @Component({
   selector: 'app-login',
@@ -14,8 +15,8 @@ export class LoginComponent implements OnInit {
   }
 
   login(){
-    window.sessionStorage.setItem("UserName", this.userName);
+    window.sessionStorage.setItem(userNameSessionKey, this.userName);
 
-    alert(window.sessionStorage.getItem("UserName"));
+    alert(window.sessionStorage.getItem(userNameSessionKey));
   }
 }

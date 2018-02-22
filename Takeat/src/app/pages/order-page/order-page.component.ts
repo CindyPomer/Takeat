@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
-import { Menu, Order } from '../../models';
+import { Menu, Order, User } from '../../models';
 import { ServerAccessService } from '../../services/server-access/server-access.service';
+import { userNameSessionKey } from '../../models/global-consts';
 
 @Component({
   selector: "app-order-page",
@@ -18,19 +19,24 @@ export class OrderPageComponent implements OnInit {
   ngOnInit() {
     this.menu$ = this.serverAccessService.getMenu$();
     this.user = this.getUser();
+    this.order = new Order();
+    this.order.user = new User();
+    this.order.user.userName = this.user;
   }
 
   breadSelected(selected) {
-    console.log('bread:', selected);
+    this.order.bread = selected[0];
   }
   saladSelected(selected) {
-    console.log('salad:', selected);
+    this.order.salads = selected;
   }
   mainCourseSelected(selected) {
-    console.log('main:', selected);
+    this.order.mainCourse = selected[0];
   }
-  getUser():string
-  {
-    return window.sessionStorage.getItem("UserName");
+  getUser(): string {
+    return window.sessionStorage.getItem(userNameSessionKey);
+  }
+  sendOrder() {
+    this.order.orderSubmitTime = new Date(Date.now());
   }
 }

@@ -74,4 +74,5 @@ input[type="checkbox"]:checked~label {
   margin: 0 -24px;
   background: rgba(0, 0, 0, .5);
   color: #FFF;
+  padding-right: 10px;
 }
