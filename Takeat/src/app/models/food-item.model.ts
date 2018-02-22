@@ -1,6 +1,6 @@
 export class FoodItem {
-    id: number;
-    name: string;
-    img: string;
-    type: FoodType;
+  id: number;
+  name: string;
+  img: string;
+  type: FoodType;
 }
