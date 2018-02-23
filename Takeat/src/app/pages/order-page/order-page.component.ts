@@ -38,5 +38,6 @@ export class OrderPageComponent implements OnInit {
   }
   sendOrder() {
     this.order.orderSubmitTime = new Date(Date.now());
+    console.log(this.order);
   }
 }

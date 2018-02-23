@@ -1,9 +1,9 @@
 header {
   height: 200px;
-  background-image: url('../../../assets/images/counter.jpg');
+  /* background-image: url('../../../assets/images/counter.jpg');
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: center;
+  background-position: center; */
   padding: 15px;
   box-sizing: border-box;
 }
@@ -12,28 +12,67 @@ header section {
   background-image: url('../../../assets/images/Logo-no-bg.PNG');
   height: 100%;
   background-repeat: no-repeat;
-  background-size: 120px;
+  background-size: 180px;
   background-position: 100% 0px;
 }
 
+.mat-typography h1,
+.order-instructions {}
+
 .mat-typography h1 {
+  font-family: 'Amatic SC', cursive;
   position: relative;
-  top: 120px;
-  margin: -15px;
+  top: -5px;
   padding: 0em 1em;
-  background: rgba(0, 0, 0, .5);
-  text-transform: uppercase;
   line-height: 2em;
-  font-size: 2em;
-  color: #FFF;
+  font-size: 6em;
+  right: 190px;
+  max-width: calc(100% - 350px);
+  min-width: 750px;
+}
+
+main {
+  background-image: linear-gradient( rgba(17, 16, 16, 0.3), rgba(230, 211, 211, 0.3));
+  display: flex;
+  flex-direction: row;
+}
+
+.order-instructions {
+  font-size: 2.5em;
+  padding-right: 25px;
+  font-family: sans-serif;
+  flex: 0.4;
 }
 
 .food-selectors-contrainer {
   display: flex;
   flex-direction: column;
   align-items: center;
+  flex: 2;
 }
 
 .mat-divider {
   width: 90%;
+  border-top-width: 5px;
+  z-index: 2;
+}
+
+.order-submit-container {
+  flex: 0.4;
+}
+
+.mat-raised-button {
+  position: relative;
+  height: 200px;
+  width: 200px;
+  top: 300px;
+  font-size: 2em;
+  font-weight: bold;
+}
+
+hr {
+  border-width: 2px;
+  width: 90%;
+  color: black;
+  border-style: dashed;
 }

@@ -1,7 +1,7 @@
 <ng-container *ngIf="foodsToDisplay && foodsToDisplay.length > 0">
   <!-- <label for="">{{foodTitle}}</label> -->
   <ul>
-    <li *ngFor="let food of foodsToDisplay">
+    <li *ngFor="let food of foodsToDisplay; let i = index">
       <input type="radio" id="{{food.id}}" value="{{food.id}}" name="{{food.type}}" *ngIf="!isMulty" (change)="sendSelectedItem($event)">
       <input type="checkbox" id="{{food.id}}" name="{{food.type}}" *ngIf="isMulty" (change)="sendSelectedItem($event)">
       <label for="{{food.id}}" class="check" [ngStyle]="{'background-image': food.pic}" >

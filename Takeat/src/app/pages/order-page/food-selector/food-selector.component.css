@@ -34,7 +34,18 @@ ul li label {
 ul li .check {
   border: 3px solid #ffffff;
   transition: border 0.25s linear;
-  opacity: 0.5;
+  /* opacity: 0.5; */
+}
+
+ul li .check::after {
+  content: "";
+  background-image: linear-gradient( rgba(211, 211, 211, 0.1), rgba(16, 16, 16, 0.9));
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: 1;
 }
 
 ul li:hover .check {
@@ -46,22 +57,29 @@ ul li .check::before {
   transition: background 0.25s linear;
 }
 
-input[type="radio"]:checked~.check,
+/* input[type="radio"]:checked~.check,
 input[type="radio"]:checked~.check:hover,
 input[type="checkbox"]:checked~.check,
 input[type="checkbox"]:checked~.check:hover {
   opacity: 1;
+} */
+
+input[type="radio"]:checked~.check::after,
+input[type="radio"]:checked~.check:hover::after,
+input[type="checkbox"]:checked~.check::after,
+input[type="checkbox"]:checked~.check:hover::after {
+  background: transparent;
 }
 
-input[type="radio"]:checked~.check::before,
+/* input[type="radio"]:checked~.check::before,
 input[type="checkbox"]:checked~.check::before {
   background: #0dff92;
-}
+} */
 
-input[type="radio"]:checked~label,
+/* input[type="radio"]:checked~label,
 input[type="checkbox"]:checked~label {
   color: #0dff92;
-}
+} */
 
 .mat-card {
   background: transparent;

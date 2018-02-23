@@ -1,9 +1,30 @@
 /* You can add global styles to this file, and also import other style files */
-@import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
-html{
-  direction:rtl;
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import url('https://fonts.googleapis.com/css?family=Amatic+SC:700|Krona+One|Sedgwick+Ave+Display|Suez+One');
+html {
+  direction: rtl;
 }
-body{
-  margin:0;
+
+body {
+  margin: 0;
+}
+
+body::after {
+  content: "";
+  /* background-image:linear-gradient(
+    rgba(17, 16, 16, 0.8), 
+    rgba(230, 211, 211, 0.103)
+  ), url('./assets/images/counter.jpg'); */
+  background-image: url('./assets/images/counter.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.5;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;
 }
