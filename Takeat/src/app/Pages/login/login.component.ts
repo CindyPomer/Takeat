@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { userNameSessionKey } from '../../models/global-consts';
 
 @Component({
@@ -9,14 +10,14 @@ import { userNameSessionKey } from '../../models/global-consts';
 export class LoginComponent implements OnInit {
   userName: string;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
   }
 
-  login(){
+  login() {
     window.sessionStorage.setItem(userNameSessionKey, this.userName);
-
-    alert(window.sessionStorage.getItem(userNameSessionKey));
+    this.router.navigate(['/order']);
+    // alert(window.sessionStorage.getItem(userNameSessionKey));
   }
 }
