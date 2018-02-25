@@ -5,6 +5,7 @@ import '../../rxjs';
 
 import { Menu } from '../../models/menu.model';
 import { Order } from '../../models';
+import { Kitchen } from '../../models/kitchen.model';
 
 @Injectable()
 export class ServerAccessService {
@@ -17,10 +18,10 @@ export class ServerAccessService {
     });
   }
 
-  public getNextOrder$(): Observable<Order> {
-   return this.http.get('../../../assets/mockup/order.json').map(response => {
-    const order: Order = <Order>response;
-    return order;
+  public getNextOrder$(): Observable<Kitchen> {
+   return this.http.get('../../../assets/mockup/kitchen.json').map(response => {
+    const kitchen: Kitchen = <Kitchen>response;
+    return kitchen;
   });
   }
 }
