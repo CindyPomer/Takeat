@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-
+import {MatDialog, MatDialogConfig} from '@angular/material';
 import { Menu, Order, User } from '../../models';
 import { ServerAccessService } from '../../services/server-access/server-access.service';
 import { userNameSessionKey } from '../../models/global-consts';
+import { OrderIdDialogComponent } from './order-id-dialog/order-id-dialog.component';
+
 
 @Component({
   selector: "app-order-page",
@@ -14,7 +16,7 @@ export class OrderPageComponent implements OnInit {
   menu$: Observable<Menu>;
   order: Order;
   user = '';
-  constructor(private serverAccessService: ServerAccessService) { }
+  constructor(private serverAccessService: ServerAccessService, private dialog: MatDialog) { }
 
   ngOnInit() {
     this.menu$ = this.serverAccessService.getMenu$();
@@ -37,7 +39,14 @@ export class OrderPageComponent implements OnInit {
     return window.sessionStorage.getItem(userNameSessionKey);
   }
   sendOrder() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.width = '550px';
+    dialogConfig.height = '200px';
+    dialogConfig.data = {
+      id: this.order.id,
+  };
     this.order.orderSubmitTime = new Date(Date.now());
+    let dialogRef = this.dialog.open(OrderIdDialogComponent, dialogConfig);
     console.log(this.order);
   }
 }
