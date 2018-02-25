@@ -24,4 +24,12 @@ export class ServerAccessService {
     return kitchen;
   });
   }
+
+  public submitOrder$(order:Order): Observable<Number>
+  {
+    return this.http.post('3000/submitOrder',order).map(response => {
+        const orderNum: Number = <Number>response;
+        return orderNum;
+  });
+  }
 }
