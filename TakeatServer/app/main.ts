@@ -27,6 +27,9 @@ app.get("/api/getMenuIngredients/", wrap(async function() {
 }));
 
 app.post("/api/submitOrder/", wrap(async function(req, res) {
+    console.log("in server");
+    console.log(req.body);
+    // return ;
     return await submitOrder(req.body);
 }));
 

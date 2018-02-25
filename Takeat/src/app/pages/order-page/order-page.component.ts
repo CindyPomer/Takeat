@@ -1,3 +1,4 @@
+import { FoodItem } from './../../models/food-item.model';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
@@ -11,17 +12,23 @@ import { userNameSessionKey } from '../../models/global-consts';
   styleUrls: ["./order-page.component.css"]
 })
 export class OrderPageComponent implements OnInit {
-  menu$: Observable<Menu>;
+  menu: Menu;
   order: Order;
   user = '';
   constructor(private serverAccessService: ServerAccessService) { }
 
   ngOnInit() {
-    this.menu$ = this.serverAccessService.getMenu$();
+    this.menu = this.serverAccessService.getMenuIngredients()
+    .subscribe(response => {
+      // console.log(response);
+      // return response;
+
+    this.menu = response;
     this.user = this.getUser();
     this.order = new Order();
     this.order.user = new User();
     this.order.user.userName = this.user;
+  });
   }
 
   breadSelected(selected) {
@@ -38,7 +45,11 @@ export class OrderPageComponent implements OnInit {
   }
   sendOrder() {
     this.order.orderSubmitTime = new Date(Date.now());
-    console.log(JSON.stringify(this.order));
-    this.serverAccessService.submitOrder$(this.order);
+    // console.log(JSON.stringify(this.order));
+    this.serverAccessService.submitOrder(this.order)
+      .subscribe(response => {
+      //  console.log(response);
+      alert(response);
+      });
   }
 }
