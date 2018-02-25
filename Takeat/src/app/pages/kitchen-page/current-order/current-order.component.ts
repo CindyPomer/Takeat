@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from "@angular/core";
-import { Order } from "../../../models";
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+
+import { Order } from '../../../models';
 
 @Component({
   selector: "app-current-order",
@@ -8,7 +9,8 @@ import { Order } from "../../../models";
 })
 export class CurrentOrderComponent implements OnInit {
   @Input() currentOrder: Order;
-  constructor() {}
+  @Output() doneClicked = new EventEmitter<any>();
+  constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 }

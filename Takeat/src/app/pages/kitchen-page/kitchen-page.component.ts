@@ -1,8 +1,8 @@
-import { Component, OnInit } from "@angular/core";
-import { ServerAccessService } from "../../services/server-access/server-access.service";
-import { Order } from "../../models";
-import { Observable } from "rxjs/Observable";
-import { Kitchen } from "../../models/kitchen.model";
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+
+import { Kitchen } from '../../models/kitchen.model';
+import { ServerAccessService } from '../../services/server-access/server-access.service';
 
 @Component({
   selector: "app-kitchen-page",
