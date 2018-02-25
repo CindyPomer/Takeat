@@ -1,10 +1,12 @@
 import { FoodItem } from './../../models/food-item.model';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-
+import {MatDialog, MatDialogConfig} from '@angular/material';
 import { Menu, Order, User } from '../../models';
 import { ServerAccessService } from '../../services/server-access/server-access.service';
 import { userNameSessionKey } from '../../models/global-consts';
+import { OrderIdDialogComponent } from './order-id-dialog/order-id-dialog.component';
+
 
 @Component({
   selector: "app-order-page",
@@ -15,7 +17,7 @@ export class OrderPageComponent implements OnInit {
   menu: Menu;
   order: Order;
   user = '';
-  constructor(private serverAccessService: ServerAccessService) { }
+  constructor(private serverAccessService: ServerAccessService, private dialog: MatDialog) { }
 
   ngOnInit() {
     this.menu = this.serverAccessService.getMenuIngredients()
@@ -44,12 +46,24 @@ export class OrderPageComponent implements OnInit {
     return window.sessionStorage.getItem(userNameSessionKey);
   }
   sendOrder() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.width = '550px';
+    dialogConfig.height = '200px';
+    
     this.order.orderSubmitTime = new Date(Date.now());
     // console.log(JSON.stringify(this.order));
     this.serverAccessService.submitOrder(this.order)
       .subscribe(response => {
       //  console.log(response);
-      alert(response);
-      });
+      //alert(response);
+      
+    console.log(this.order);
+    console.log(JSON.stringify(this.order));
+    
+    dialogConfig.data = {
+      id: response,
+    };
+    let dialogRef = this.dialog.open(OrderIdDialogComponent, dialogConfig);
+  });
   }
 }
