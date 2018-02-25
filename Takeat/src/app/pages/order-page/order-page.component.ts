@@ -48,5 +48,7 @@ export class OrderPageComponent implements OnInit {
     this.order.orderSubmitTime = new Date(Date.now());
     let dialogRef = this.dialog.open(OrderIdDialogComponent, dialogConfig);
     console.log(this.order);
+    console.log(JSON.stringify(this.order));
+    this.serverAccessService.submitOrder$(this.order);
   }
 }

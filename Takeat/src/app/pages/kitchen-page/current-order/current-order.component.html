@@ -1,0 +1,17 @@
+<ng-container ng-if="currentOrder">
+  <mat-chip-list>
+    <ul>
+      <li>לחם:
+        <mat-chip color="primary" selected="true">
+          {{currentOrder.bread.name}}</mat-chip>
+      </li>
+      <li>תוספות:
+        <ul>
+          <li *ngFor="let item of currentOrder.salads">{{item.name}}</li>
+        </ul>
+      </li>
+      <li>עיקרית: {{currentOrder.mainCourse.name}}</li>
+    </ul>
+    <button>בוצע</button>
+  </mat-chip-list>
+</ng-container>

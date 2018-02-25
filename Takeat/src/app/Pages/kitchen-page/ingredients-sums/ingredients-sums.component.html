@@ -1,0 +1,26 @@
+<div class="mainDiv">
+  <p>
+    סיכום מרכיבים לשעה:
+  </p>
+
+  <div class="foodTypeHeader">לחמים:</div>
+    <ul>
+      <li *ngFor="let ingredient of ingredientsSum.breads">
+        {{ ingredient[0] }} - {{ingredient[1] }}
+      </li>
+    </ul>
+  <div class="foodTypeHeader">סלטים:</div>
+
+  <ul>
+    <li *ngFor="let ingredient of ingredientsSum.salads">
+      {{ ingredient[0] }} - {{ ingredient[1] }}
+    </li>
+  </ul>
+  <div class="foodTypeHeader">מנה עיקרית:</div>
+
+  <ul>
+    <li *ngFor="let ingredient of ingredientsSum.mainCourses">
+      {{ ingredient[0] }} - {{ ingredient[1] }}
+    </li>
+  </ul>
+</div>
