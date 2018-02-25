@@ -1,3 +1,4 @@
+import { IngredientsSumsPageComponent } from './Pages/kitchen-page/ingredients-sums/ingredients-sums.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -22,7 +23,8 @@ import { KitchenPageComponent } from './pages/kitchen-page/kitchen-page.componen
     OrderPageComponent,
     LoginComponent,
     routingComponents,
-    KitchenPageComponent
+    KitchenPageComponent,
+    IngredientsSumsPageComponent
   ],
   imports: [
     BrowserModule,
