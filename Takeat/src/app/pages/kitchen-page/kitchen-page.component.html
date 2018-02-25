@@ -1,2 +1,3 @@
-<app-ingredients-sums ></app-ingredients-sums>
-{{(currentOrder$ | async) | json}}
+<ng-container *ngIf="(currentOrder$ | async) as currentOrder">
+<app-ingredients-sums [ingredientsSum]="currentOrder.ingredientsSum"></app-ingredients-sums>
+</ng-container>

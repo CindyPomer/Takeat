@@ -1,5 +1,5 @@
 export class IngredientsSum {
-  breadsSum: [string, number][];
+  breads: [string, number][];
   salads: [string, number][];
   mainCourses: [string, number][];
 }
