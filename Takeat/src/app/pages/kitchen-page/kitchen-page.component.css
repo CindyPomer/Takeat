@@ -1,0 +1,15 @@
+:host {
+  display: block;
+}
+
+main {
+  display: flex;
+  flex-direction: row;
+}
+
+.sums-container {
+  flex:1;
+}
+.current-order-container {
+  flex:4
+}

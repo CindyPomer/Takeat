@@ -1,3 +1,10 @@
 <ng-container *ngIf="(currentOrder$ | async) as currentOrder">
-<app-ingredients-sums [ingredientsSum]="currentOrder.ingredientsSum"></app-ingredients-sums>
+  <main>
+    <section class="sums-container">
+      <app-ingredients-sums [ingredientsSum]="currentOrder.ingredientsSum"></app-ingredients-sums>
+    </section>
+    <section class="current-order-container">
+      <app-current-order [currentOrder]="currentOrder.currentOrder"></app-current-order>
+    </section>
+  </main>
 </ng-container>

@@ -4,9 +4,12 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { MatListModule } from '@angular/material/list';
 import { MatDividerModule } from '@angular/material/divider';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatChipsModule} from '@angular/material/chips';
+
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './Pages/login/login.component';
@@ -15,6 +18,7 @@ import { OrderPageComponent } from './pages/order-page/order-page.component';
 import { AppRoutingModule, routingComponents } from './routes/app.routes';
 import { ServerAccessService } from './services/server-access/server-access.service';
 import { KitchenPageComponent } from './pages/kitchen-page/kitchen-page.component';
+import { CurrentOrderComponent } from './pages/kitchen-page/current-order/current-order.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +28,8 @@ import { KitchenPageComponent } from './pages/kitchen-page/kitchen-page.componen
     LoginComponent,
     routingComponents,
     KitchenPageComponent,
-    IngredientsSumsPageComponent
+    IngredientsSumsPageComponent,
+    CurrentOrderComponent
   ],
   imports: [
     BrowserModule,
@@ -34,8 +39,10 @@ import { KitchenPageComponent } from './pages/kitchen-page/kitchen-page.componen
     MatButtonModule,
     MatDividerModule,
     FormsModule,
+    MatListModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatChipsModule
   ],
   providers: [ServerAccessService],
   bootstrap: [AppComponent]
