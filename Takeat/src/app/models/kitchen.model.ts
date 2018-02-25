@@ -3,5 +3,5 @@ import { Order } from './order.model';
 
 export class Kitchen{
     ingredientsSum : IngredientsSum;
-    currOrder : Order;
+    currentOrder : Order;
 }
