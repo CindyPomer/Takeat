@@ -13,6 +13,7 @@ import { FoodSelectorComponent } from './pages/order-page/food-selector/food-sel
 import { OrderPageComponent } from './pages/order-page/order-page.component';
 import { AppRoutingModule, routingComponents } from './routes/app.routes';
 import { ServerAccessService } from './services/server-access/server-access.service';
+import { KitchenPageComponent } from './pages/kitchen-page/kitchen-page.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { ServerAccessService } from './services/server-access/server-access.serv
     FoodSelectorComponent,
     OrderPageComponent,
     LoginComponent,
-    routingComponents
+    routingComponents,
+    KitchenPageComponent
   ],
   imports: [
     BrowserModule,
