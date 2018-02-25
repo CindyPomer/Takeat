@@ -1,17 +1,37 @@
 <ng-container ng-if="currentOrder">
-  <mat-chip-list>
-    <ul>
-      <li>לחם:
-        <mat-chip color="primary" selected="true">
-          {{currentOrder.bread.name}}</mat-chip>
-      </li>
-      <li>תוספות:
-        <ul>
-          <li *ngFor="let item of currentOrder.salads">{{item.name}}</li>
-        </ul>
-      </li>
-      <li>עיקרית: {{currentOrder.mainCourse.name}}</li>
-    </ul>
-    <button>בוצע</button>
-  </mat-chip-list>
+  <mat-card>
+    <h2>מספר הזמנה:
+      <mat-chip selected="true"> {{currentOrder.id}}</mat-chip>
+    </h2>
+    <mat-chip-list>
+      <section>
+        <div>
+          <label>לחם:</label>
+          <span>
+            <mat-chip selected="true"> {{currentOrder.bread.name}}</mat-chip>
+          </span>
+        </div>
+        <div>
+          <label>תוספות:</label>
+          <ul>
+            <li *ngFor="let item of currentOrder.salads">
+              <span>
+                <mat-chip selected="true"> {{item.name}}</mat-chip>
+              </span>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <label> עיקרית:
+            <span>
+              <mat-chip selected="true">{{currentOrder.mainCourse.name}}</mat-chip>
+            </span>
+          </label>
+        </div>
+      </section>
+    </mat-chip-list>
+        <section class="button-wrapper">
+            <button mat-raised-button type="submit" color="red">בוצע</button>
+          </section>
+  </mat-card>
 </ng-container>
