@@ -1,0 +1,17 @@
+{
+  "currentOrder": {
+    "user": {
+      "userName": "ליאור",
+      "id": "1"
+    },
+    "orderSubmitTime": "2018-02-25T12:48:53.434Z",
+    "bread": "1",
+    "salads": [null, null, null, "3", "4", "5"],
+    "mainCourse": "7"
+  },
+  "ingredientsSum": {
+    "breadsSum": [["באגט", 3], ["פיתה",4], ["לאפה",8]],
+    "salads": [["סלט", 5],["חומוס",5],["ציפס",5]],
+    "mainCourses": [["שניצל", 6],["קבב", 6],["שווארמה", 6]]
+  }
+}

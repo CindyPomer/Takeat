@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { ServerAccessService } from "../../services/server-access/server-access.service";
 import { Order } from "../../models";
 import { Observable } from "rxjs/Observable";
+import { Kitchen } from "../../models/kitchen.model";
 
 @Component({
   selector: "app-kitchen-page",
@@ -9,7 +10,7 @@ import { Observable } from "rxjs/Observable";
   styleUrls: ["./kitchen-page.component.css"]
 })
 export class KitchenPageComponent implements OnInit {
-  currentOrder$: Observable<Order> = null;
+  currentOrder$: Observable<Kitchen> = null;
   constructor(private serverAccessService: ServerAccessService) {}
 
   ngOnInit() {
