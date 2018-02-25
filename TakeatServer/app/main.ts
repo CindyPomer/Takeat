@@ -23,6 +23,7 @@ app.use(bodyParser.urlencoded({
   }));
 
 app.get("/api/getMenuIngredients/", wrap(async function() {
+    console.log("in server");
     return await getMenuIngredients();
 }));
 

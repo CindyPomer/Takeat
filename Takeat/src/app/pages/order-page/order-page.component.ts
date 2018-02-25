@@ -1,12 +1,11 @@
-import { FoodItem } from './../../models/food-item.model';
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import {MatDialog, MatDialogConfig} from '@angular/material';
-import { Menu, Order, User } from '../../models';
-import { ServerAccessService } from '../../services/server-access/server-access.service';
-import { userNameSessionKey } from '../../models/global-consts';
-import { OrderIdDialogComponent } from './order-id-dialog/order-id-dialog.component';
-
+import { FoodItem } from "./../../models/food-item.model";
+import { Component, OnInit } from "@angular/core";
+import { Observable } from "rxjs/Observable";
+import { MatDialog, MatDialogConfig } from "@angular/material";
+import { Menu, Order, User } from "../../models";
+import { ServerAccessService } from "../../services/server-access/server-access.service";
+import { userNameSessionKey } from "../../models/global-consts";
+import { OrderIdDialogComponent } from "./order-id-dialog/order-id-dialog.component";
 
 @Component({
   selector: "app-order-page",
@@ -14,23 +13,21 @@ import { OrderIdDialogComponent } from './order-id-dialog/order-id-dialog.compon
   styleUrls: ["./order-page.component.css"]
 })
 export class OrderPageComponent implements OnInit {
-  menu: Menu;
+  menu$: Observable<Menu>;
   order: Order;
-  user = '';
-  constructor(private serverAccessService: ServerAccessService, private dialog: MatDialog) { }
+  user = "";
+  constructor(
+    private serverAccessService: ServerAccessService,
+    private dialog: MatDialog
+  ) {}
 
   ngOnInit() {
-    this.menu = this.serverAccessService.getMenuIngredients()
-    .subscribe(response => {
-      // console.log(response);
-      // return response;
+    this.menu$ = this.serverAccessService.getMenuIngredients();
 
-    this.menu = response;
     this.user = this.getUser();
     this.order = new Order();
     this.order.user = new User();
     this.order.user.userName = this.user;
-  });
   }
 
   breadSelected(selected) {
@@ -47,23 +44,21 @@ export class OrderPageComponent implements OnInit {
   }
   sendOrder() {
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.width = '550px';
-    dialogConfig.height = '200px';
-    
+    dialogConfig.width = "550px";
+    dialogConfig.height = "200px";
+
     this.order.orderSubmitTime = new Date(Date.now());
     // console.log(JSON.stringify(this.order));
-    this.serverAccessService.submitOrder(this.order)
-      .subscribe(response => {
+    this.serverAccessService.submitOrder(this.order).subscribe(response => {
       //  console.log(response);
       //alert(response);
-      
-    console.log(this.order);
-    console.log(JSON.stringify(this.order));
-    
-    dialogConfig.data = {
-      id: response,
-    };
-    let dialogRef = this.dialog.open(OrderIdDialogComponent, dialogConfig);
-  });
+      console.log(this.order);
+      console.log(JSON.stringify(this.order));
+
+      dialogConfig.data = {
+        id: response
+      };
+      let dialogRef = this.dialog.open(OrderIdDialogComponent, dialogConfig);
+    });
   }
 }

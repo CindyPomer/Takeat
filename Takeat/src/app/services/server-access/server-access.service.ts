@@ -18,8 +18,8 @@ const httpOptions = {
 export class ServerAccessService {
   constructor(private http: HttpClient) {}
 
-  public getMenuIngredients(): Observable<Menu> {
-    return this.http.get('/api/getMenuIngredients/').map(response => {
+  public getMenuIngredients(): Observable<any> {
+    return this.http.get('/api/getMenuIngredients').map(response => {
       const menu: Menu = <Menu>response;
       return menu;
     });
