@@ -1,4 +1,7 @@
-:host
-{
-  font-size:6em;
+:host {
+  font-size: 6em;
+}
+
+ul {
+  list-style: none;
 }
