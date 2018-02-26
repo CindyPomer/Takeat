@@ -1,6 +1,6 @@
 import * as express from "express";
-import {getMenuIngredients, submitOrder} from "./dal";
-var bodyParser = require('body-parser')
+import { getMenuIngredients, submitOrder, orderDone } from "./dal";
+var bodyParser = require("body-parser");
 
 const app = express();
 
@@ -18,39 +18,58 @@ const app = express();
 //     next();
 // });
 
-app.use(bodyParser.urlencoded({
+app.use(
+  bodyParser.urlencoded({
     extended: true
-  }));
+  })
+);
 
-app.get("/api/getMenuIngredients/", wrap(async function() {
+app.get(
+  "/api/getMenuIngredients/",
+  wrap(async function() {
     console.log("in server");
     return await getMenuIngredients();
-}));
+  })
+);
 
-app.post("/api/submitOrder/", wrap(async function(req, res) {
+app.post(
+  "/api/submitOrder/",
+  wrap(async function(req, res) {
     console.log("in server");
     console.log(req.body);
     // return ;
     return await submitOrder(req.body);
-}));
+  })
+);
 
-function wrap(fn){
-    return function(req, res) {
-        try {
-            const retVal = fn(req, res);
+app.post(
+  "/api/orderDone/",
+  wrap(async function(req, res) {
+    console.log("in /api/orderDone/");
+    console.log(req.body);
+    // return ;
+    return await orderDone(req.body);
+  })
+);
 
-            if (retVal && retVal.then) {
-                retVal.then(data => {
-                    res.json(data);
-                }).catch(err => {
-                    res.json({error: err.message});
-                });
-            }
-        }
-        catch(err){
-            res.json({error: err.message});
-        }
+function wrap(fn) {
+  return function(req, res) {
+    try {
+      const retVal = fn(req, res);
+
+      if (retVal && retVal.then) {
+        retVal
+          .then(data => {
+            res.json(data);
+          })
+          .catch(err => {
+            res.json({ error: err.message });
+          });
+      }
+    } catch (err) {
+      res.json({ error: err.message });
     }
+  };
 }
 
 // app.get("/api/contact", function(req, res){
@@ -63,6 +82,6 @@ function wrap(fn){
 //         res.end();
 //     });
 // });
-app.listen(3000, function(){
-    console.log("Server is running ABC");
+app.listen(3000, function() {
+  console.log("Server is running ABC");
 });
