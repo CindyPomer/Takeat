@@ -16,7 +16,7 @@ function start() {
         stdio: "inherit",
     });
 
-    spawn("node", ["main.js"], {
+    spawn("node", ["./app/main.js"], {
         shell: true,
         stdio: "inherit",
     });
