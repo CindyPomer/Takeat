@@ -2,8 +2,17 @@ import { Order, Menu, Kitchen } from "../../Takeat/src/app/models";
 import { delay } from "./helpers";
 import { IngredientsSum } from "../../Takeat/src/app/models/ingredients-sum.model";
 import * as express from "express";
-import { MongoClient, Db, connect } from "mongodb";
+import { MongoClient, Db, connect, ObjectId } from "mongodb";
 
+const ordersCollectionName = "Orders";
+const menuCollectionName = "Menu";
+/*
+export class IngredientsSum {
+  public breads: [string, number][];
+  public salads: [string, number][];
+  public mainCourses: [string, number][];
+}
+*/
 class DbClient {
   public db: Db;
 
@@ -31,13 +40,13 @@ const dbClient = new DbClient();
 
 // async function tryIt() {
 //   let db = await dbClient.connect();
+//   for (let index = 0; index < 5; index++) {
+//     let results = await dbClient.db.collection(ordersCollectionName).insertOne({
+//       isDone: false
+//     });
+//   }
 
-//   let results = await dbClient.db.collection("todo").insertOne({
-//     topic: "learn angular.js",
-//     progress: 10
-//   });
-
-//   console.log(results.insertedId);
+//     //console.log(results.insertedId);
 // }
 
 export async function getMenuIngredients() {
@@ -120,17 +129,6 @@ export async function getMenuIngredients() {
   return menu;
 }
 
-// export async function getAllContacts() {
-//     return delay(1000).then(function(){
-//         throw new Error("Ooops");
-//
-//         return [
-//             {id: 1, name: "Ori"},
-//             {id: 2, name: "Roni"},
-//         ];
-//     });
-// }
-
 export async function submitOrder(order: Order) {
   // insert Order to DB
   // console.log(order.bread);
@@ -139,10 +137,31 @@ export async function submitOrder(order: Order) {
 
 export async function orderDone(orderId: string) {
   console.log("in submitOrder");
-
   const kitchen = new Kitchen();
+
+  let db = await dbClient.connect();
+  //update the order isDone=true
+  let results = await dbClient.db
+    .collection(ordersCollectionName)
+    .update(
+      { _id: new ObjectId("5a942ff32567c883fa68d3e6") },
+      { $set: { isDone: true } }
+    );
+
+  // get all orders
+  const orders: any[] = await dbClient.db
+    .collection(ordersCollectionName)
+    .find()
+    .toArray();
+
+  // filter orders for current order
+  const currOrder = orders.find(item => item.isDone == false);
+  kitchen.currentOrder = currOrder;
+
+  // populate kitchen.ingredientsSum
   kitchen.ingredientsSum = new IngredientsSum();
-  kitchen.ingredientsSum.breads = [["bla", 1]];
+  
+
   return kitchen;
 }
 
