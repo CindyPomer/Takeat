@@ -5,9 +5,9 @@ import { mongodb } from "mongodb";
 const bodyParser = require('body-parser')
 
 const app = express();
-const connect = promisify(mongodb.MongoClient.connect);
+// const connect = promisify(mongodb.MongoClient.connect);
 
-mongodb.Cursor.prototype.toArrayAsync = promisify(mongodb.Cursor.prototype.toArray);
+// mongodb.Cursor.prototype.toArrayAsync = promisify(mongodb.Cursor.prototype.toArray);
 
 app.use(bodyParser.urlencoded({
     extended: true
