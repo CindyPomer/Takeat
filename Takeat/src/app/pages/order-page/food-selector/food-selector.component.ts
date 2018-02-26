@@ -1,6 +1,6 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 
-import { FoodItem } from '../../../models';
+import { FoodItem } from "../../../models";
 
 @Component({
   selector: "app-food-selector",
@@ -30,5 +30,10 @@ export class FoodSelectorComponent implements OnInit {
       }
     }
     this.changed.emit(this.selectedIds);
+  }
+
+  getImagePath(imgName) {
+    const fullPath = 'url("/assets/images/food_images/' + imgName + '")';
+    return fullPath.toString();
   }
 }
