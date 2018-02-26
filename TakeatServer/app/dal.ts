@@ -1,6 +1,44 @@
 import { Order, Menu, Kitchen } from "../../Takeat/src/app/models";
 import { delay } from "./helpers";
 import { IngredientsSum } from "../../Takeat/src/app/models/ingredients-sum.model";
+import * as express from "express";
+import { MongoClient, Db, connect } from "mongodb";
+
+class DbClient {
+  public db: Db;
+
+  async connect() {
+    if (!this.db) {
+      try {
+        const client: MongoClient = await MongoClient.connect(
+          "mongodb://localhost:27017"
+        );
+
+        this.db = client.db("TakeatDB");
+        console.log("Connected to db");
+        return this.db;
+      } catch (error) {
+        console.log("Unable to connect to db");
+      }
+    }
+    return this.db;
+  }
+}
+
+const dbClient = new DbClient();
+
+// tryIt();
+
+// async function tryIt() {
+//   let db = await dbClient.connect();
+
+//   let results = await dbClient.db.collection("todo").insertOne({
+//     topic: "learn angular.js",
+//     progress: 10
+//   });
+
+//   console.log(results.insertedId);
+// }
 
 export async function getMenuIngredients() {
   // await delay(1000);
@@ -100,10 +138,32 @@ export async function submitOrder(order: Order) {
 }
 
 export async function orderDone(orderId: string) {
-    console.log("in submitOrder");
-  
-    const kitchen = new Kitchen();
-    kitchen.ingredientsSum = new IngredientsSum();
-    kitchen.ingredientsSum.breads= [["bla",1]]
-    return kitchen;
+  console.log("in submitOrder");
+
+  const kitchen = new Kitchen();
+  kitchen.ingredientsSum = new IngredientsSum();
+  kitchen.ingredientsSum.breads = [["bla", 1]];
+  return kitchen;
+}
+
+export function promisify(fn) {
+  return function() {
+    const args = Array.from(arguments);
+    const me = this;
+
+    return new Promise(function(resolve, reject) {
+      function callback(err, retVal) {
+        if (err) {
+          reject(err);
+          return;
+        }
+
+        resolve(retVal);
+      }
+
+      args.push(callback);
+
+      fn.apply(me, args);
+    });
+  };
 }

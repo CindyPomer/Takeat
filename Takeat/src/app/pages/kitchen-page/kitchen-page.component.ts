@@ -14,10 +14,10 @@ export class KitchenPageComponent implements OnInit {
   constructor(private serverAccessService: ServerAccessService) {}
 
   ngOnInit() {
-    this.getNextOrder();
+    this.getNextOrder(null);
   }
 
-  getNextOrder() {
-    this.currentOrder$ = this.serverAccessService.getNextOrder$();
+  getNextOrder(id) {
+    this.currentOrder$ = this.serverAccessService.orderDone$(id);
   }
 }

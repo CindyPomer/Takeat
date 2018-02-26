@@ -2,13 +2,7 @@ import * as express from "express";
 import { getMenuIngredients, submitOrder, orderDone } from "./dal";
 var bodyParser = require("body-parser");
 
-import { mongodb } from "mongodb";
-const bodyParser = require('body-parser')
-
 const app = express();
-const connect = promisify(mongodb.MongoClient.connect);
-
-mongodb.Cursor.prototype.toArrayAsync = promisify(mongodb.Cursor.prototype.toArray);
 
 app.use(
   bodyParser.urlencoded({
@@ -64,27 +58,7 @@ function wrap(fn) {
   };
 }
 
-function promisify(fn){
-    return function(){
-        const args = Array.from(arguments);
-        const me = this;
 
-        return new Promise(function(resolve, reject){
-            function callback(err, retVal){
-                if(err){
-                    reject(err);
-                    return;
-                }
-
-                resolve(retVal);
-            }
-
-            args.push(callback);
-
-            fn.apply(me, args);
-        });
-    }
-}
 
 // app.get("/api/contact", function(req, res){
 //     getAllContacts().then(contacts => {
