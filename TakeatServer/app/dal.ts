@@ -4,6 +4,7 @@ import { IngredientsSum } from "../../Takeat/src/app/models/ingredients-sum.mode
 import * as express from "express";
 import { MongoClient, Db, connect } from "mongodb";
 
+
 class DbClient {
   public db: Db;
 
@@ -131,10 +132,31 @@ export async function getMenuIngredients() {
 //     });
 // }
 
+function getNextSequenceValue(sequenceName){
+  const counter = this.db.collection("Counter");
+  var sequenceDocument = counter.findAndModify({
+     query:{_id: sequenceName },
+     update: {$inc:{sequence_value:1}},
+     new:true
+  });
+  console.log( "seq:" + sequenceDocument.sequence_value);
+  return sequenceDocument.sequence_value;
+}
+
 export async function submitOrder(order: Order) {
-  // insert Order to DB
-  // console.log(order.bread);
-  return 1;
+  try{
+  await dbClient.connect();
+  order.id = getNextSequenceValue("item_id");
+  console.log(order.id);
+  const orders = this.db.collection("Orders");
+  const result = await orders.insertOne(Order)
+  console.log(result);
+ return result;
+  }
+  catch(err){
+    console.log(err.message);
+  }
+
 }
 
 export async function orderDone(orderId: string) {

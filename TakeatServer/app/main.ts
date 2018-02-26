@@ -23,7 +23,6 @@ app.post(
   wrap(async function(req, res) {
     console.log("in server");
     console.log(req.body);
-    // return ;
     return await submitOrder(req.body);
   })
 );
@@ -31,10 +30,15 @@ app.post(
 app.post(
   "/api/orderDone/",
   wrap(async function(req, res) {
+    try{
     console.log("in /api/orderDone/");
     console.log(req.body);
     // return ;
     return await orderDone(req.body);
+    }
+    catch (err){
+      console.log(err.message);
+    }
   })
 );
 
