@@ -1,11 +1,12 @@
-import { FoodItem } from "./../../models/food-item.model";
-import { Component, OnInit } from "@angular/core";
-import { Observable } from "rxjs/Observable";
-import { MatDialog, MatDialogConfig } from "@angular/material";
-import { Menu, Order, User } from "../../models";
-import { ServerAccessService } from "../../services/server-access/server-access.service";
-import { userNameSessionKey } from "../../models/global-consts";
-import { OrderIdDialogComponent } from "./order-id-dialog/order-id-dialog.component";
+import { Component, OnInit } from '@angular/core';
+import { MatDialog, MatDialogConfig } from '@angular/material';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
+
+import { Menu, Order, User } from '../../models';
+import { userNameSessionKey } from '../../models/global-consts';
+import { ServerAccessService } from '../../services/server-access/server-access.service';
+import { OrderIdDialogComponent } from './order-id-dialog/order-id-dialog.component';
 
 @Component({
   selector: "app-order-page",
@@ -18,7 +19,8 @@ export class OrderPageComponent implements OnInit {
   user = "";
   constructor(
     private serverAccessService: ServerAccessService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -40,7 +42,11 @@ export class OrderPageComponent implements OnInit {
     this.order.mainCourse = selected[0];
   }
   getUser(): string {
-    return window.sessionStorage.getItem(userNameSessionKey);
+    const user = window.sessionStorage.getItem(userNameSessionKey);
+    if (!user) {
+      this.router.navigate(['/login']);
+    }
+    return user;
   }
   sendOrder() {
     const dialogConfig = new MatDialogConfig();
@@ -58,7 +64,7 @@ export class OrderPageComponent implements OnInit {
       dialogConfig.data = {
         id: response
       };
-      let dialogRef = this.dialog.open(OrderIdDialogComponent, dialogConfig);
+      const dialogRef = this.dialog.open(OrderIdDialogComponent, dialogConfig);
     });
   }
 }
