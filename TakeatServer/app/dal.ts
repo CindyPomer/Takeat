@@ -6,6 +6,7 @@ import { MongoClient, Db, connect, ObjectId } from "mongodb";
 
 const ordersCollectionName = "Orders";
 const menuCollectionName = "Menu";
+
 /*
 export class IngredientsSum {
   public breads: [string, number][];
@@ -157,11 +158,10 @@ export async function orderDone(orderId: string) {
   // filter orders for current order
   const currOrder = orders.find(item => item.isDone == false);
   kitchen.currentOrder = currOrder;
-
   // populate kitchen.ingredientsSum
   kitchen.ingredientsSum = new IngredientsSum();
   
-
+  kitchen.ingredientsSum = await this.getOrdersAggregation(orders);
   return kitchen;
 }
 /*
@@ -178,8 +178,8 @@ export async function getOrders() {
 */
 
 export async function getOrdersAggregation(ordersCollection) {
-  let orders = await ordersCollection.find({"isDone":false}).toArray(); 
-  const ingredientsSum:any = await initilizeIngredientsSum(); 
+  let ingredientsSum:any = await initilizeIngredientsSum(); 
+  let orders:any = ordersCollection.filter(item => item.isDone === false);
   for (let order of orders) {
       setFoodType(ingredientsSum.breads, order.bread);
       setFoodType(ingredientsSum.mainCourses, order.mainCourse);
@@ -187,11 +187,12 @@ export async function getOrdersAggregation(ordersCollection) {
           setFoodType(ingredientsSum.salads, salad);
       }
   }
+  return ingredientsSum;
 }
 
 export async function initilizeIngredientsSum(){
   let db = await dbClient.connect();
-  let menu = db.collection("MENU");
+  let menu = db.collection(menuCollectionName);
   let menuItems = await menu.find({}).toArray(); 
   let ingredientsSum = new IngredientsSum();
   ingredientsSum.breads = await getMenuIngredient(menuItems[0].breads);
