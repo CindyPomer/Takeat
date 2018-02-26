@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+
 import { IngredientsSum } from '../../../models/ingredients-sum.model';
 
 @Component({
@@ -8,12 +9,11 @@ import { IngredientsSum } from '../../../models/ingredients-sum.model';
 })
 export class IngredientsSumsPageComponent implements OnInit {
 
-  @Input() ingredientsSum : IngredientsSum;
+  @Input() ingredientsSum: IngredientsSum;
 
   constructor() { }
 
   ngOnInit() {
-  
   }
 
 }

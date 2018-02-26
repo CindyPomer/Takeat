@@ -23,10 +23,14 @@ app.use(bodyParser.urlencoded({
   }));
 
 app.get("/api/getMenuIngredients/", wrap(async function() {
+    console.log("in server");
     return await getMenuIngredients();
 }));
 
 app.post("/api/submitOrder/", wrap(async function(req, res) {
+    console.log("in server");
+    console.log(req.body);
+    // return ;
     return await submitOrder(req.body);
 }));
 

@@ -4,8 +4,7 @@
       <app-ingredients-sums [ingredientsSum]="currentOrder.ingredientsSum"></app-ingredients-sums>
     </section>
     <section class="current-order-container">
-      <app-current-order [currentOrder]="currentOrder.currentOrder"></app-current-order>
+      <app-current-order [currentOrder]="currentOrder.currentOrder" (doneClicked)="getNextOrder()"></app-current-order>
     </section>
-
   </main>
 </ng-container>
