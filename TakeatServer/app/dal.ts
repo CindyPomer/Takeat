@@ -145,7 +145,7 @@ export async function orderDone(orderId: string) {
   kitchen.ingredientsSum.breads = [["bla", 1]];
   return kitchen;
 }
-
+/*
 let orders = {};
 getOrdersAggregation(orders);
 
@@ -156,11 +156,10 @@ export async function getOrders() {
   
   return orders_1;
 }
+*/
 
-
-export async function getOrdersAggregation(orders) {
-  orders = await getOrders();
-  console.log(orders);
+export async function getOrdersAggregation(ordersCollection) {
+  let orders = await ordersCollection.find({"isDone":false}).toArray(); 
   const ingredientsSum:any = await initilizeIngredientsSum(); 
   for (let order of orders) {
       setFoodType(ingredientsSum.breads, order.bread);
@@ -169,7 +168,6 @@ export async function getOrdersAggregation(orders) {
           setFoodType(ingredientsSum.salads, salad);
       }
   }
-  console.log(ingredientsSum);
 }
 
 export async function initilizeIngredientsSum(){
