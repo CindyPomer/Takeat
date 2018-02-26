@@ -1,35 +1,26 @@
 import * as express from "express";
 import {getMenuIngredients, submitOrder} from "./dal";
-var bodyParser = require('body-parser')
+
+import { mongodb } from "mongodb";
+const bodyParser = require('body-parser')
 
 const app = express();
+const connect = promisify(mongodb.MongoClient.connect);
 
-// app.use(function(req, res, next){
-//     // console.log("AAA");
-
-//     // if(!req.headers["Authorization"]){
-//     //     res.json({
-//     //         error: "Not Authorized"
-//     //     });
-
-//     //     return;
-//     // }
-
-//     next();
-// });
+mongodb.Cursor.prototype.toArrayAsync = promisify(mongodb.Cursor.prototype.toArray);
 
 app.use(bodyParser.urlencoded({
     extended: true
   }));
 
 app.get("/api/getMenuIngredients/", wrap(async function() {
-    console.log("in server");
+    // console.log("in server");
     return await getMenuIngredients();
 }));
 
 app.post("/api/submitOrder/", wrap(async function(req, res) {
-    console.log("in server");
-    console.log(req.body);
+    // console.log("in server");
+    // console.log(req.body);
     // return ;
     return await submitOrder(req.body);
 }));
@@ -50,6 +41,28 @@ function wrap(fn){
         catch(err){
             res.json({error: err.message});
         }
+    }
+}
+
+function promisify(fn){
+    return function(){
+        const args = Array.from(arguments);
+        const me = this;
+
+        return new Promise(function(resolve, reject){
+            function callback(err, retVal){
+                if(err){
+                    reject(err);
+                    return;
+                }
+
+                resolve(retVal);
+            }
+
+            args.push(callback);
+
+            fn.apply(me, args);
+        });
     }
 }
 
