@@ -1,12 +1,12 @@
+import { IngredientsSum } from './../../Takeat/src/app/models/ingredients-sum.model';
 import { Order, Menu, Kitchen } from "../../Takeat/src/app/models";
 import { delay } from "./helpers";
-import { IngredientsSum } from "../../Takeat/src/app/models/ingredients-sum.model";
 import * as express from "express";
 import { MongoClient, Db, connect } from "mongodb";
 
 class DbClient {
   public db: Db;
-
+  
   async connect() {
     if (!this.db) {
       try {
@@ -24,8 +24,8 @@ class DbClient {
     return this.db;
   }
 }
-
-const dbClient = new DbClient();
+ 
+ const dbClient = new DbClient();
 
 // tryIt();
 
@@ -145,6 +145,56 @@ export async function orderDone(orderId: string) {
   kitchen.ingredientsSum.breads = [["bla", 1]];
   return kitchen;
 }
+
+let orders = {};
+getOrdersAggregation(orders);
+
+export async function getOrders() {
+  let db = await dbClient.connect();
+  let ordersCollection = db.collection("ORDERS");
+  let orders_1 = await ordersCollection.find({"isDone":false}).toArray(); 
+  
+  return orders_1;
+}
+
+
+export async function getOrdersAggregation(orders) {
+  orders = await getOrders();
+  console.log(orders);
+  const ingredientsSum:any = await initilizeIngredientsSum(); 
+  for (let order of orders) {
+      setFoodType(ingredientsSum.breads, order.bread);
+      setFoodType(ingredientsSum.mainCourses, order.mainCourse);
+      for (let salad of order.salads){
+          setFoodType(ingredientsSum.salads, salad);
+      }
+  }
+  console.log(ingredientsSum);
+}
+
+export async function initilizeIngredientsSum(){
+  let db = await dbClient.connect();
+  let menu = db.collection("MENU");
+  let menuItems = await menu.find({}).toArray(); 
+  let ingredientsSum = new IngredientsSum();
+  ingredientsSum.breads = await getMenuIngredient(menuItems[0].breads);
+  ingredientsSum.salads = await getMenuIngredient(menuItems[0].salads);
+  ingredientsSum.mainCourses = await getMenuIngredient(menuItems[0].mainCourses);
+  return ingredientsSum;
+}
+
+export async function getMenuIngredient(menuItems){
+  let itemsArr:any=[];
+  for (let item of menuItems) {
+    itemsArr.push([item.name,0]);
+  }
+  return itemsArr;
+}
+
+ export async function setFoodType(aggregatedItems, newitem){
+  aggregatedItems.forEach(function(o){if (o[0] == newitem.name) o[1]+=1} );
+}
+
 
 export function promisify(fn) {
   return function() {
