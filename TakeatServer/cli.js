@@ -16,7 +16,7 @@ function start() {
         stdio: "inherit",
     });
 
-    spawn("node", ["dist/TakeatServer/app/dal.js"], {
+    spawn("node", ["dist/TakeatServer/app/main.js"], {
         shell: true,
         stdio: "inherit",
     });
