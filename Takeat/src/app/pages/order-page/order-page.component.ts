@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialog, MatDialogConfig } from '@angular/material';
-import { Router } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
+import { Component, OnInit } from "@angular/core";
+import { MatDialog, MatDialogConfig } from "@angular/material";
+import { Router } from "@angular/router";
+import { Observable } from "rxjs/Observable";
 
-import { Menu, Order, User } from '../../models';
-import { userNameSessionKey } from '../../models/global-consts';
-import { ServerAccessService } from '../../services/server-access/server-access.service';
-import { OrderIdDialogComponent } from './order-id-dialog/order-id-dialog.component';
+import { Menu, Order, User, FoodItem } from "../../models";
+import { userNameSessionKey } from "../../models/global-consts";
+import { ServerAccessService } from "../../services/server-access/server-access.service";
+import { OrderIdDialogComponent } from "./order-id-dialog/order-id-dialog.component";
 
 @Component({
   selector: "app-order-page",
@@ -30,6 +30,7 @@ export class OrderPageComponent implements OnInit {
     this.order = new Order();
     this.order.user = new User();
     this.order.user.userName = this.user;
+    this.order.isDone = false;
   }
 
   breadSelected(selected) {
@@ -44,7 +45,7 @@ export class OrderPageComponent implements OnInit {
   getUser(): string {
     const user = window.sessionStorage.getItem(userNameSessionKey);
     if (!user) {
-      this.router.navigate(['/login']);
+      this.router.navigate(["/login"]);
     }
     return user;
   }
@@ -54,17 +55,19 @@ export class OrderPageComponent implements OnInit {
     dialogConfig.height = "200px";
 
     this.order.orderSubmitTime = new Date(Date.now());
-    // console.log(JSON.stringify(this.order));
+    this.cleanSalads();
     this.serverAccessService.submitOrder(this.order).subscribe(response => {
       //  console.log(response);
       //alert(response);
-      console.log(this.order);
-      console.log(JSON.stringify(this.order));
 
       dialogConfig.data = {
         id: response
       };
       const dialogRef = this.dialog.open(OrderIdDialogComponent, dialogConfig);
     });
+  }
+  cleanSalads() {
+    const tempSalads = this.order.salads.filter(salad => !null);
+    this.order.salads = tempSalads;
   }
 }

@@ -33,8 +33,9 @@ export class ServerAccessService {
   }
 
   public submitOrder(order: Order): Observable<number> {
+    const jsonOrder = JSON.stringify(order);
     return this.http
-      .post("/api/submitOrder/", order, httpOptions)
+      .post("/api/submitOrder/", `order=${jsonOrder}`, httpOptions)
       .map(response => {
         const id: number = <number>response;
         return id;
