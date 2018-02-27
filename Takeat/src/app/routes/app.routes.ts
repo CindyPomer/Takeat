@@ -1,3 +1,4 @@
+import { FinishOrderComponent } from './../Pages/finish-order/finish-order.component';
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 
@@ -9,7 +10,8 @@ const routes: Routes = [
   { path: "", pathMatch: "full", redirectTo: "login" },
   { path: "login", component: LoginComponent },
   { path: "order", component: OrderPageComponent },
-  { path: "kitchen", component: KitchenPageComponent }
+  { path: "kitchen", component: KitchenPageComponent },
+  { path: "finish", component: FinishOrderComponent }
 ];
 
 @NgModule({
@@ -18,4 +20,4 @@ const routes: Routes = [
 })
 export class AppRoutingModule {}
 
-export const routingComponents = [LoginComponent, OrderPageComponent];
+export const routingComponents = [LoginComponent, OrderPageComponent,FinishOrderComponent];

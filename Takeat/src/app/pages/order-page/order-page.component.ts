@@ -65,6 +65,8 @@ export class OrderPageComponent implements OnInit {
         id: response
       };
       const dialogRef = this.dialog.open(OrderIdDialogComponent, dialogConfig);
+
+      this.router.navigate(['/finish']);
     });
   }
 }
