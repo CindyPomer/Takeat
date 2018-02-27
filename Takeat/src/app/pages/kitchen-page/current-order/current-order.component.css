@@ -28,7 +28,7 @@ label {
 span {
   /* color:red; */
   margin-top: 15px;
-  display: inline-block;
+  display: block;
 }
 .mat-chip {
   font-size: 1em;
