@@ -33,6 +33,6 @@
     <button mat-raised-button type="submit" (click)="sendOrder()">בצע הזמנה</button>
   </section>
 </main>
-<section *ngIf="finishedOrdering">
-  <h1>תודה שהזמנת ב Takeat!</h1>
+<section class="center" *ngIf="finishedOrdering">
+  <mat-card><h1>תודה שהזמנת ב Takeat!</h1></mat-card>
 </section>

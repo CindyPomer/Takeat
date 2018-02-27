@@ -76,3 +76,8 @@ hr {
   color: black;
   border-style: dashed;
 }
+.center{
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}

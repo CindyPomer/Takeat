@@ -1,5 +1,5 @@
 <ng-container *ngIf="(currentOrder$ | async) as currentOrder">
-  <main class="mat-typography">
+  <main class="mat-typography" *ngIf="currentOrder.currentOrder">
     <section class="sums-container">
       <app-ingredients-sums [ingredientsSum]="currentOrder.ingredientsSum"></app-ingredients-sums>
     </section>
@@ -7,4 +7,7 @@
       <app-current-order [currentOrder]="currentOrder.currentOrder" (doneClicked)="getNextOrder(currentOrder.currentOrder.id)"></app-current-order>
     </section>
   </main>
+  <section class="finished" *ngIf="!currentOrder.currentOrder">
+      <mat-card><h1>כל הכבוד! סיימת את כל ההזמנות!</h1> </mat-card>
+  </section>
 </ng-container>
