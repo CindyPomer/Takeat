@@ -1,12 +1,12 @@
-import { Component, OnInit } from "@angular/core";
-import { MatDialog, MatDialogConfig } from "@angular/material";
-import { Router } from "@angular/router";
-import { Observable } from "rxjs/Observable";
+import { Component, OnInit } from '@angular/core';
+import { MatDialog, MatDialogConfig } from '@angular/material';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
 
-import { Menu, Order, User, FoodItem } from "../../models";
-import { userNameSessionKey } from "../../models/global-consts";
-import { ServerAccessService } from "../../services/server-access/server-access.service";
-import { OrderIdDialogComponent } from "./order-id-dialog/order-id-dialog.component";
+import { Menu, Order, User } from '../../models';
+import { userNameSessionKey } from '../../models/global-consts';
+import { ServerAccessService } from '../../services/server-access/server-access.service';
+import { OrderIdDialogComponent } from './order-id-dialog/order-id-dialog.component';
 
 @Component({
   selector: "app-order-page",
@@ -17,6 +17,8 @@ export class OrderPageComponent implements OnInit {
   menu$: Observable<Menu>;
   order: Order;
   user = "";
+  finishedOrdering = false;
+
   constructor(
     private serverAccessService: ServerAccessService,
     private dialog: MatDialog,
@@ -31,6 +33,7 @@ export class OrderPageComponent implements OnInit {
     this.order.user = new User();
     this.order.user.userName = this.user;
     this.order.isDone = false;
+
   }
 
   breadSelected(selected) {
@@ -55,7 +58,9 @@ export class OrderPageComponent implements OnInit {
     dialogConfig.height = "200px";
 
     this.order.orderSubmitTime = new Date(Date.now());
-    this.cleanSalads();
+    if (this.order.salads && this.order.salads.length > 0) {
+      this.cleanSalads();
+    }
     this.serverAccessService.submitOrder(this.order).subscribe(response => {
       //  console.log(response);
       //alert(response);
@@ -64,8 +69,11 @@ export class OrderPageComponent implements OnInit {
         id: response
       };
       const dialogRef = this.dialog.open(OrderIdDialogComponent, dialogConfig);
-
-      this.router.navigate(['/finishOrder']);
+      this.dialog.afterAllClosed
+      .map(dialog => {
+        this.finishedOrdering = true;
+      })
+      .forEach(() => {});
     });
   }
   cleanSalads() {
