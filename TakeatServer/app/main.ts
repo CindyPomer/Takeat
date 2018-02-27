@@ -1,5 +1,6 @@
 import * as express from "express";
 import { getMenuIngredients, submitOrder, orderDone } from "./dal";
+import { json } from "body-parser";
 var bodyParser = require("body-parser");
 
 const app = express();
@@ -33,8 +34,7 @@ app.post(
   wrap(async function(req, res) {
     console.log("in /api/orderDone/");
     console.log(req.body);
-    // return ;
-    return await orderDone(req.body);
+    return await orderDone(req.body.id);
   })
 );
 

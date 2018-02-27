@@ -1,4 +1,4 @@
-import { IngredientsSum } from './../../Takeat/src/app/models/ingredients-sum.model';
+import { IngredientsSum } from "./../../Takeat/src/app/models/ingredients-sum.model";
 import { Order, Menu, Kitchen } from "../../Takeat/src/app/models";
 import { delay } from "./helpers";
 import * as express from "express";
@@ -16,7 +16,7 @@ export class IngredientsSum {
 */
 class DbClient {
   public db: Db;
-  
+
   async connect() {
     if (!this.db) {
       try {
@@ -34,8 +34,8 @@ class DbClient {
     return this.db;
   }
 }
- 
- const dbClient = new DbClient();
+
+const dbClient = new DbClient();
 
 // tryIt();
 
@@ -60,22 +60,19 @@ export async function getMenuIngredients() {
       {
         id: 0,
         name: "פיתה",
-        img:
-          "pitta.jpg",
+        img: "pitta.jpg",
         type: 1
       },
       {
         id: 1,
         name: "לאפה",
-        img:
-          "laffa.jpg",
+        img: "laffa.jpg",
         type: 1
       },
       {
         id: 2,
         name: "בגט",
-        img:
-          "bagget.jpg",
+        img: "bagget.jpg",
         type: 1
       }
     ],
@@ -83,22 +80,19 @@ export async function getMenuIngredients() {
       {
         id: 3,
         name: "חומוס",
-        img:
-          "humus.jpg",
+        img: "humus.jpg",
         type: 2
       },
       {
         id: 4,
         name: "סלט קלאסי",
-        img:
-          "salad.jpg",
+        img: "salad.jpg",
         type: 2
       },
       {
         id: 5,
         name: "ציפס",
-        img:
-          "chips.jpg",
+        img: "chips.jpg",
         type: 2
       }
     ],
@@ -106,22 +100,19 @@ export async function getMenuIngredients() {
       {
         id: 6,
         name: "שניצל",
-        img:
-          "shnitzel.jpg",
+        img: "shnitzel.jpg",
         type: 3
       },
       {
         id: 7,
         name: "שווארמה",
-        img:
-          "shawarma.jpg",
+        img: "shawarma.jpg",
         type: 3
       },
       {
         id: 8,
         name: "קבב",
-        img:
-          "kabab.jpg",
+        img: "kabab.jpg",
         type: 3
       }
     ]
@@ -137,17 +128,15 @@ export async function submitOrder(order: Order) {
 }
 
 export async function orderDone(orderId: string) {
-  console.log("in submitOrder");
+  console.log("in submitOrder", orderId);
   const kitchen = new Kitchen();
 
   let db = await dbClient.connect();
+  orderId = +orderId;
   //update the order isDone=true
   let results = await dbClient.db
     .collection(ordersCollectionName)
-    .update(
-      { _id: new ObjectId("5a942ff32567c883fa68d3e6") },
-      { $set: { isDone: true } }
-    );
+    .update({ id: orderId }, { $set: { isDone: true } });
 
   // get all orders
   const orders: any[] = await dbClient.db
@@ -156,11 +145,14 @@ export async function orderDone(orderId: string) {
     .toArray();
 
   // filter orders for current order
-  const currOrder = orders.find(item => item.isDone == false);
+  const currOrder = orders.find(item => {
+    return item.isDone == false;
+  });
+
   kitchen.currentOrder = currOrder;
   // populate kitchen.ingredientsSum
   kitchen.ingredientsSum = new IngredientsSum();
-  
+
   kitchen.ingredientsSum = await this.getOrdersAggregation(orders);
   return kitchen;
 }
@@ -178,41 +170,48 @@ export async function getOrders() {
 */
 
 export async function getOrdersAggregation(ordersCollection) {
-  let ingredientsSum:any = await initilizeIngredientsSum(); 
-  let orders:any = ordersCollection.filter(item => item.isDone === false);
+  let ingredientsSum: any = await initilizeIngredientsSum();
+
+  let orders: any = ordersCollection.filter(item => item.isDone === false);
   for (let order of orders) {
-      setFoodType(ingredientsSum.breads, order.bread);
-      setFoodType(ingredientsSum.mainCourses, order.mainCourse);
-      for (let salad of order.salads){
-          setFoodType(ingredientsSum.salads, salad);
-      }
+    setFoodType(ingredientsSum.breads, order.bread);
+    setFoodType(ingredientsSum.mainCourses, order.mainCourse);
+    for (let salad of order.salads) {
+      setFoodType(ingredientsSum.salads, salad);
+    }
   }
   return ingredientsSum;
 }
 
-export async function initilizeIngredientsSum(){
+export async function initilizeIngredientsSum() {
   let db = await dbClient.connect();
   let menu = db.collection(menuCollectionName);
-  let menuItems = await menu.find({}).toArray(); 
+  let menuItems = await menu.find({}).toArray();
   let ingredientsSum = new IngredientsSum();
   ingredientsSum.breads = await getMenuIngredient(menuItems[0].breads);
   ingredientsSum.salads = await getMenuIngredient(menuItems[0].salads);
-  ingredientsSum.mainCourses = await getMenuIngredient(menuItems[0].mainCourses);
+  ingredientsSum.mainCourses = await getMenuIngredient(
+    menuItems[0].mainCourses
+  );
+
   return ingredientsSum;
 }
 
-export async function getMenuIngredient(menuItems){
-  let itemsArr:any=[];
+export async function getMenuIngredient(menuItems) {
+  let itemsArr: any = [];
   for (let item of menuItems) {
-    itemsArr.push([item.name,0]);
+    itemsArr.push([item.name, 0]);
   }
   return itemsArr;
 }
 
- export async function setFoodType(aggregatedItems, newitem){
-  aggregatedItems.forEach(function(o){if (o[0] == newitem.name) o[1]+=1} );
+export async function setFoodType(aggregatedItems, newitem) {
+  aggregatedItems.forEach(function(o) {
+    if (o[0] == newitem.name) {
+      o[1] += 1;
+    }
+  });
 }
-
 
 export function promisify(fn) {
   return function() {

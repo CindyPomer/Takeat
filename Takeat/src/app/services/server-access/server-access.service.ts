@@ -26,12 +26,10 @@ export class ServerAccessService {
   }
 
   public orderDone$(id): Observable<Kitchen> {
-    return this.http
-      .post("/api/orderDone", id, httpOptions)
-      .map(response => {
-        const kitchen: Kitchen = <Kitchen>response;
-        return kitchen;
-      });
+    return this.http.post("/api/orderDone", `id=${id}`, httpOptions).map(response => {
+      const kitchen: Kitchen = <Kitchen>response;
+      return kitchen;
+    });
   }
 
   public submitOrder(order: Order): Observable<number> {
