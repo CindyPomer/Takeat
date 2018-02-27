@@ -55,79 +55,12 @@ export async function getMenuIngredients() {
 
   // throw new Error("DAL");
 
-  const menu: Menu = {
-    breads: [
-      {
-        id: 0,
-        name: "פיתה",
-        img:
-          "pitta.jpg",
-        type: 1
-      },
-      {
-        id: 1,
-        name: "לאפה",
-        img:
-          "laffa.jpg",
-        type: 1
-      },
-      {
-        id: 2,
-        name: "בגט",
-        img:
-          "bagget.jpg",
-        type: 1
-      }
-    ],
-    salads: [
-      {
-        id: 3,
-        name: "חומוס",
-        img:
-          "humus.jpg",
-        type: 2
-      },
-      {
-        id: 4,
-        name: "סלט קלאסי",
-        img:
-          "salad.jpg",
-        type: 2
-      },
-      {
-        id: 5,
-        name: "ציפס",
-        img:
-          "chips.jpg",
-        type: 2
-      }
-    ],
-    mainCourses: [
-      {
-        id: 6,
-        name: "שניצל",
-        img:
-          "shnitzel.jpg",
-        type: 3
-      },
-      {
-        id: 7,
-        name: "שווארמה",
-        img:
-          "shawarma.jpg",
-        type: 3
-      },
-      {
-        id: 8,
-        name: "קבב",
-        img:
-          "kabab.jpg",
-        type: 3
-      }
-    ]
-  };
-
-  return menu;
+  let db = await dbClient.connect();
+  let menuColl = db.collection(menuCollectionName);
+  
+  let menu = await menuColl.find({}).toArray();
+  console.log(menu[0]);
+  return menu[0];
 }
 
 export async function submitOrder(order: Order) {
