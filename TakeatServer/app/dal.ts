@@ -64,6 +64,7 @@ export async function getMenuIngredients() {
   let menuColl = db.collection(menuCollectionName);
   
   let menu = await menuColl.find({}).toArray();
+  //console.log(menu[0]);
   return menu[0];
 }
 

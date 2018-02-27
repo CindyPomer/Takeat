@@ -20,8 +20,8 @@ export class ServerAccessService {
 
   public getMenuIngredients(): Observable<any> {
     return this.http.get("/api/getMenuIngredients").map(response => {
-      console.log(response[0]);
-      const menu: Menu = <Menu>response[0];
+      console.log(response);
+      const menu: Menu = <Menu>response;
       return menu;
     });
   }
