@@ -14,7 +14,6 @@ app.use(
 app.get(
   "/api/getMenuIngredients/",
   wrap(async function() {
-    console.log("in server");
     return await getMenuIngredients();
   })
 );
@@ -22,19 +21,18 @@ app.get(
 app.post(
   "/api/submitOrder/",
   wrap(async function(req, res) {
-    console.log("in server");
-    console.log(req.body);
-    // return ;
-    return await submitOrder(req.body);
+    return await submitOrder(JSON.parse(req.body.order));
   })
 );
 
 app.post(
   "/api/orderDone/",
   wrap(async function(req, res) {
-    console.log("in /api/orderDone/");
-    console.log(req.body);
-    return await orderDone(req.body.id);
+    try {
+      return await orderDone(req.body.id);
+    } catch (err) {
+      console.log(err.message);
+    }
   })
 );
 
@@ -57,8 +55,6 @@ function wrap(fn) {
     }
   };
 }
-
-
 
 // app.get("/api/contact", function(req, res){
 //     getAllContacts().then(contacts => {
