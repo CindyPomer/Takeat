@@ -21,6 +21,8 @@ import { ServerAccessService } from './services/server-access/server-access.serv
 import { KitchenPageComponent } from './pages/kitchen-page/kitchen-page.component';
 import { OrderIdDialogComponent} from './pages/order-page/order-id-dialog/order-id-dialog.component';
 import { CurrentOrderComponent } from './pages/kitchen-page/current-order/current-order.component';
+import { FinishOrderComponent } from './pages/finish-order/finish-order.component';
+import { FinishKitchenComponent } from './pages/finish-kitchen/finish-kitchen.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { CurrentOrderComponent } from './pages/kitchen-page/current-order/curren
     KitchenPageComponent,
     OrderIdDialogComponent,
     IngredientsSumsPageComponent,
-    CurrentOrderComponent
+    CurrentOrderComponent,
+    FinishOrderComponent,
+    FinishKitchenComponent
   ],
   imports: [
     BrowserModule,
