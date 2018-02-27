@@ -22,6 +22,7 @@ import { KitchenPageComponent } from './pages/kitchen-page/kitchen-page.componen
 import { OrderIdDialogComponent} from './pages/order-page/order-id-dialog/order-id-dialog.component';
 import { CurrentOrderComponent } from './pages/kitchen-page/current-order/current-order.component';
 import { FinishOrderComponent } from './pages/finish-order/finish-order.component';
+import { FinishKitchenComponent } from './pages/finish-kitchen/finish-kitchen.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { FinishOrderComponent } from './pages/finish-order/finish-order.componen
     OrderIdDialogComponent,
     IngredientsSumsPageComponent,
     CurrentOrderComponent,
-    FinishOrderComponent
+    FinishOrderComponent,
+    FinishKitchenComponent
   ],
   imports: [
     BrowserModule,

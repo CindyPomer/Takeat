@@ -1,3 +1,4 @@
+import { FinishKitchenComponent } from './../Pages/finish-kitchen/finish-kitchen.component';
 import { FinishOrderComponent } from './../Pages/finish-order/finish-order.component';
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
@@ -11,7 +12,8 @@ const routes: Routes = [
   { path: "login", component: LoginComponent },
   { path: "order", component: OrderPageComponent },
   { path: "kitchen", component: KitchenPageComponent },
-  { path: "finish", component: FinishOrderComponent }
+  { path: "finishOrder", component: FinishOrderComponent },
+  { path: "finishKitchen", component: FinishKitchenComponent }
 ];
 
 @NgModule({
@@ -20,4 +22,4 @@ const routes: Routes = [
 })
 export class AppRoutingModule {}
 
-export const routingComponents = [LoginComponent, OrderPageComponent,FinishOrderComponent];
+export const routingComponents = [LoginComponent, OrderPageComponent,FinishOrderComponent,FinishKitchenComponent];
