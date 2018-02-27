@@ -1,11 +1,13 @@
-import { FinishKitchenComponent } from './../Pages/finish-kitchen/finish-kitchen.component';
-import { FinishOrderComponent } from './../Pages/finish-order/finish-order.component';
-import { NgModule } from "@angular/core";
-import { RouterModule, Routes } from "@angular/router";
+// import { FinishKitchenComponent } from './../Pages/finish-kitchen/finish-kitchen.component';
+// import { FinishOrderComponent } from './../Pages/finish-order/finish-order.component';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 
-import { OrderPageComponent } from "../pages/order-page/order-page.component";
-import { LoginComponent } from "./../Pages/login/login.component";
-import { KitchenPageComponent } from "../pages/kitchen-page/kitchen-page.component";
+import { FinishOrderComponent } from '../pages/finish-order/finish-order.component';
+import { KitchenPageComponent } from '../pages/kitchen-page/kitchen-page.component';
+import { OrderPageComponent } from '../pages/order-page/order-page.component';
+import { LoginComponent } from './../Pages/login/login.component';
+import { FinishKitchenComponent } from '../pages/finish-kitchen/finish-kitchen.component';
 
 const routes: Routes = [
   { path: "", pathMatch: "full", redirectTo: "login" },
@@ -22,4 +24,7 @@ const routes: Routes = [
 })
 export class AppRoutingModule {}
 
-export const routingComponents = [LoginComponent, OrderPageComponent,FinishOrderComponent,FinishKitchenComponent];
+export const routingComponents = [LoginComponent, OrderPageComponent,
+  FinishOrderComponent,
+  FinishKitchenComponent
+];

@@ -36,7 +36,8 @@ import { FinishKitchenComponent } from './pages/finish-kitchen/finish-kitchen.co
     IngredientsSumsPageComponent,
     CurrentOrderComponent,
     FinishOrderComponent,
-    FinishKitchenComponent
+    FinishOrderComponent,
+    FinishKitchenComponent,
   ],
   imports: [
     BrowserModule,
