@@ -11,10 +11,7 @@ mongodb["Collection"].prototype.findOneAndUpdateAsync = promisify(mongodb["Colle
 const ordersCollectionName = "Orders";
 const menuCollectionName = "Menu";
 
-<<<<<<< HEAD
 const testReturn: any = "";
-=======
->>>>>>> e2e3c915e05abd21ca3eeaa14f7e250538b22145
 /*
 export class IngredientsSum {
   public breads: [string, number][];
@@ -198,13 +195,10 @@ export async function orderDone(orderId: string) {
   kitchen.currentOrder = currOrder;
   // populate kitchen.ingredientsSum
   kitchen.ingredientsSum = new IngredientsSum();
-<<<<<<< HEAD
 
 
-=======
   
   kitchen.ingredientsSum = await this.getOrdersAggregation(orders);
->>>>>>> e2e3c915e05abd21ca3eeaa14f7e250538b22145
   return kitchen;
 }
 /*
